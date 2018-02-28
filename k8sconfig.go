@@ -60,6 +60,7 @@ func configSetup() {
 
 	viper.SetConfigName(CONFIGFILENAMEPREFIX) // name of config file (without extension)
 	viper.AddConfigPath(".")
+	viper.AddConfigPath("./config")
 }
 
 func configReadConfigFile() {

@@ -40,3 +40,26 @@ k8sconfig.[json, toml, yaml, hcl, properties]
 
 ### default value
 The default values is preset to "default"
+
+
+## running the application
+
+```
+k8sconfig     // will default to 0.0.0.0:80
+
+or
+
+k8sconfig --url="0.0.0.0:yourport"
+```
+
+## Dockerfile
+
+The docker file will perform a multistage build and allow the application to be run on port 80
+
+```
+interactive mode
+docker run -p80:80 it --rm yourImageName
+
+inject a configuration file
+docker run -p80:80 -it --rm -v~/yourconfigfilelocation:/root/config 
+```
