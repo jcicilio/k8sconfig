@@ -16,7 +16,7 @@ const PREFIX = "K8SCONFIG"
 const NAME = "vName"
 const ENVIRONMENTVALUE = "environment"
 const DEFAULTVALUE = "default"
-const COMMANDLINEVALUE = "command line"
+const COMMANDLINEVALUE = "command-line"
 const CONFIGFILEVALUE = "configuration-file"
 const CONFIGFILENAMEPREFIX = "k8sconfig"
 
@@ -69,6 +69,12 @@ func configReadConfigFile() {
 	}
 }
 
+func configCommandLine(){
+	pflag.String("url", viper.GetString(URLDEFAULTNAME), fmt.Sprintf("The base URL for the service. Default to %v", getConfigString(URLDEFAULTNAME)))
+	pflag.Parse()
+	viper.BindPFlags(pflag.CommandLine)
+}
+
 func getValue() string {
 	return viper.GetString(NAME)
 }
@@ -81,13 +87,10 @@ func main() {
 	fmt.Println("starting k8sconfigtest... ")
 
 	configSetup()
-
 	configReadConfigFile()
-	fmt.Printf("on start test variable value is: %v\n", getValue())
+	configCommandLine()
 
-	pflag.String("url", viper.GetString(URLDEFAULTNAME), fmt.Sprintf("The base URL for the service. Default to %v", getConfigString(URLDEFAULTNAME)))
-	pflag.Parse()
-	viper.BindPFlags(pflag.CommandLine)
+	fmt.Printf("on start test variable value is: %v\n", getValue())
 
 	http.Handle("/", Router())
 
