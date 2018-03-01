@@ -12,7 +12,7 @@ This project relies on the functionality of [viper](https://github.com/spf13/vip
 
 ## route
 
-http://host:80/
+http://host:80/config
 
 Response will be of form,
  
@@ -57,9 +57,12 @@ k8sconfig --url="0.0.0.0:yourport"
 The docker file will perform a multistage build and allow the application to be run on port 80
 
 ```
-interactive mode
+interactive mode / with output of 'default'
 docker run -p80:80 it --rm yourImageName
 
-inject a configuration file
-docker run -p80:80 -it --rm -v~/yourconfigfilelocation:/root/config 
+inject a configuration file / with output 'configuration-file'
+docker run -p80:80 -it --rm -v /yourconfigfilelocation:/app/config yourImageName
+
+inject an environment variable / with output 'environment'
+docker run -p80:80 -it --rm --env K8SCONFIG_VNAME="environment" yourImageName
 ```

@@ -66,7 +66,7 @@ func configSetup() {
 func configReadConfigFile() {
 	err := viper.ReadInConfig() // Find and read the config file
 	if err != nil {             // Handle errors reading the config file
-		fmt.Printf("error reading in configuration file %v\n", CONFIGFILENAMEPREFIX)
+		fmt.Printf("Using alternate configuration settings. No configuration file found for prefix: %v.\n", CONFIGFILENAMEPREFIX)
 	}
 }
 
