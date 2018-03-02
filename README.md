@@ -1,5 +1,5 @@
 # k8sConfigTest
-Simple Go app to test external configuration in Kubernetes.  The API returns a json response with the value indicating where
+Simple Go app to test external configuration injection for environment variable or configuration file in Kubernetes.  The API returns a json response with the value indicating where
 the one configured environment variable is retrieved from.
 
 For this API possible values, retrieved in order of precedence
@@ -41,7 +41,6 @@ k8sconfig.[json, toml, yaml, hcl, properties]
 ### default value
 The default values is preset to "default"
 
-
 ## running the application
 
 ```
@@ -66,3 +65,4 @@ docker run -p80:80 -it --rm -v /yourconfigfilelocation:/app/config yourImageName
 inject an environment variable / with output 'environment'
 docker run -p80:80 -it --rm --env K8SCONFIG_VNAME="environment" yourImageName
 ```
+

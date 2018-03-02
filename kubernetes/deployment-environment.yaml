@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: k8sconfig-environment
+  labels:
+    app: k8sconfig
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8sconfig
+  template:
+    metadata:
+      labels:
+        app: k8sconfig
+    spec:
+      containers:
+      - name: k8sconfig
+        image: johncicilio/k8sconfig:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: K8SCONFIG_VNAME
+          value: "environment"

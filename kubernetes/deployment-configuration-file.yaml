@@ -1,0 +1,32 @@
+# https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-files
+# Note: this deployment requires a configmap to be created first
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: k8sconfig-configuration-file
+  labels:
+    app: k8sconfig
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k8sconfig
+  template:
+    metadata:
+      labels:
+        app: k8sconfig
+    spec:
+      containers:
+      - name: k8sconfig
+        image: johncicilio/k8sconfig:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume
+        configMap:
+          # Provide the name of the ConfigMap containing the files you want
+          # to add to the container
+          name: k8sconfig-config
